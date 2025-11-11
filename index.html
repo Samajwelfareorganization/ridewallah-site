@@ -170,6 +170,31 @@ document.addEventListener('DOMContentLoaded', function(){
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
        alt="WhatsApp" width="50" height="50">
 </a>
+<script>
+document.getElementById('bike').addEventListener('change', function() {
+  if (this.value) {
+    console.log('Bike selected:', this.value);
+  }
+});
+</script>
+<script>
+const bikeSelect = document.getElementById('bike');
+const daysInput = document.getElementById('days');
+const rentDisplay = document.getElementById('rentDisplay');
+
+function calculateRent() {
+  const selectedOption = bikeSelect.options[bikeSelect.selectedIndex];
+  const rate = parseInt(selectedOption.getAttribute('data-rate')) || 0;
+  const days = parseInt(daysInput.value) || 0;
+  const total = rate * days;
+  rentDisplay.textContent = total > 0
+    ? `Estimated Rent: ₹${total.toLocaleString()}`
+    : `Estimated Rent: ₹0`;
+}
+
+bikeSelect.addEventListener('change', calculateRent);
+daysInput.addEventListener('input', calculateRent);
+</script>
 
 </body>
 </html>
