@@ -1,0 +1,150 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ride Wallah — Rent Bikes in Delhi NCR</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Ride Wallah</h1>
+      <nav class="top-nav">
+        <a href="#bikes">Bikes</a>
+        <a href="#booking">Book Now</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h2>Rent reliable bikes across Delhi NCR</h2>
+        <p class="lead">Hourly, daily and weekly rentals for delivery, commute or trips. Clean bikes, verified vendors, easy booking.</p>
+        <p class="cta"><a href="#booking" class="btn">Book a bike</a></p>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg" alt="Motorbike">
+      </div>
+    </div>
+  </section>
+
+  <section id="bikes" class="container section">
+    <h3>Available Bikes (sample)</h3>
+    <div class="cards">
+      <article class="card">
+        <img src="https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg" alt="Apache">
+        <div class="card-body">
+          <h4>TVS Apache RTR 160</h4>
+          <p class="muted">Good for city and short outstation trips</p>
+          <p class="price">₹500 / day</p>
+          <button class="select-btn" data-title="TVS Apache RTR 160">Select</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.pexels.com/photos/3808830/pexels-photo-3808830.jpeg" alt="Activa">
+        <div class="card-body">
+          <h4>Honda Activa 125</h4>
+          <p class="muted">Automatic scooter — ideal for daily commute</p>
+          <p class="price">₹350 / day</p>
+          <button class="select-btn" data-title="Honda Activa 125">Select</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg" alt="Royal Enfield">
+        <div class="card-body">
+          <h4>Royal Enfield Classic 350</h4>
+          <p class="muted">Comfortable for long rides</p>
+          <p class="price">₹1200 / day</p>
+          <button class="select-btn" data-title="Royal Enfield Classic 350">Select</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="booking" class="container section booking-section">
+    <h3>Book a bike</h3>
+    <form id="bookingForm" action="https://formsubmit.co/rsmishra89822@gmail.com" method="POST">
+      <!-- Formsubmit uses hidden input for redirect and spam protection -->
+      <input type="hidden" name="_next" value="thank-you.html">
+      <input type="hidden" name="_captcha" value="false">
+      <div class="form-grid">
+        <label>Selected bike
+          <input id="bikeField" type="text" name="Bike" required readonly>
+        </label>
+
+        <label>Pickup date & time
+          <input type="datetime-local" name="Pickup" required>
+        </label>
+
+        <label>Drop date & time
+          <input type="datetime-local" name="Drop" required>
+        </label>
+
+        <label>Your full name
+          <input type="text" name="Name" placeholder="Rahul Mishra" required>
+        </label>
+
+        <label>Your phone (WhatsApp)
+          <input type="tel" name="Phone" placeholder="+91 89822 69317" required>
+        </label>
+
+        <label>Email (optional)
+          <input type="email" name="Email" placeholder="you@example.com">
+        </label>
+
+        <label>Pickup location
+          <input type="text" name="PickupLocation" placeholder="Delhi NCR">
+        </label>
+
+        <label>Message / special requests
+          <textarea name="Message" rows="3" placeholder="Any notes for the vendor"></textarea>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Send Booking</button>
+        <button type="button" id="clearBtn" class="btn btn-ghost">Clear</button>
+      </div>
+    </form>
+    <p class="muted">After submission you'll receive a confirmation from Ride Wallah. We will call/WhatsApp to confirm pickup.</p>
+  </section>
+
+  <section id="contact" class="container section contact">
+    <h3>Contact</h3>
+    <p><strong>Email:</strong> rsmishra89822@gmail.com</p>
+    <p><strong>Phone / WhatsApp:</strong> +91 89822 69317</p>
+    <p><strong>Service area:</strong> Delhi NCR</p>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Ride Wallah • Ride safe • Call/WhatsApp: +91 89822 69317</p>
+    </div>
+  </footer>
+
+<script>
+// Small client script to allow selecting a bike into the form
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.select-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const title = btn.getAttribute('data-title');
+      document.getElementById('bikeField').value = title;
+      // Scroll to booking form
+      document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+    });
+  });
+  document.getElementById('clearBtn').addEventListener('click', ()=>{
+    document.getElementById('bookingForm').reset();
+    document.getElementById('bikeField').value='';
+  });
+});
+</script>
+
+</body>
+</html>
