@@ -1,161 +1,311 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ride Wallah — Rent Bikes in Delhi NCR</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>RideWallah — Bike Rentals Delhi NCR</title>
+
+<style>
+:root {
+  --brand: #1e40af;
+  --brand-light: #eef2ff;
+  --text-dark: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: #f9fafb;
+  color: var(--text-dark);
+}
+
+/* ---------- HEADER ---------- */
+.site-header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+.brand {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--brand);
+}
+
+.top-nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+}
+
+.top-nav a:hover {
+  color: var(--brand);
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--brand), #2563eb);
+  color: white;
+  padding: 80px 20px;
+}
+
+.hero h2 {
+  font-size: 42px;
+  font-weight: 800;
+}
+
+.hero p {
+  font-size: 18px;
+  opacity: 0.95;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #d1d5db;
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  background: white;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.section h3 {
+  margin-top: 0;
+}
+
+/* ---------- BIKE BUTTONS ---------- */
+.bikes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.bike-card {
+  border: 2px solid #e5e7eb;
+  padding: 15px;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.bike-card.active {
+  border-color: var(--brand);
+  background: var(--brand-light);
+}
+
+/* ---------- FORM ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.muted {
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+/* ---------- FOOTER ---------- */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+}
+</style>
 </head>
 
 <body>
 
 <header class="site-header">
-  <div class="container">
-    <h1 class="brand">Ride Wallah</h1>
+  <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
+    <div class="brand">RideWallah</div>
     <nav class="top-nav">
       <a href="#bikes">Bikes</a>
-      <a href="#booking">Book Now</a>
+      <a href="#booking">Book</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <h2>Rent reliable bikes across Delhi NCR</h2>
-      <p class="lead">Hourly, daily and weekly rentals. Easy booking.</p>
-      <p class="cta"><a href="#booking" class="btn">Book a bike</a></p>
-    </div>
+  <div class="container">
+    <h2>Rent reliable bikes across Delhi NCR</h2>
+    <p>Hourly • Daily • Weekly • Hassle-free booking</p>
+    <a href="#booking" class="btn btn-primary">Book a Bike</a>
   </div>
 </section>
-  <section id="bikes" class="container section">
+
+<section id="bikes" class="container section">
   <h3>Select a bike</h3>
-
-  <div class="bike-grid">
-    <button class="bike-card" data-bike="Royal Enfield Classic 350">
-      🏍️ Royal Enfield Classic 350
-    </button>
-
-    <button class="bike-card" data-bike="Bajaj Pulsar 220">
-      🏍️ Bajaj Pulsar 220
-    </button>
-
-    <button class="bike-card" data-bike="Yamaha FZ">
-      🏍️ Yamaha FZ
-    </button>
-
-    <button class="bike-card" data-bike="Honda Activa">
-      🛵 Honda Activa
-    </button>
+  <div class="bikes">
+    <div class="bike-card" data-bike="Honda Activa 125">Honda Activa 125</div>
+    <div class="bike-card" data-bike="TVS Jupiter">TVS Jupiter</div>
+    <div class="bike-card" data-bike="Bajaj Pulsar">Bajaj Pulsar</div>
+    <div class="bike-card" data-bike="Royal Enfield Classic">Royal Enfield</div>
   </div>
 </section>
 
-<section id="booking" class="container section booking-section">
+<section id="booking" class="container section">
   <h3>Book a bike</h3>
 
   <form id="bookingForm">
     <div class="form-grid">
 
       <label>Selected bike
-        <input type="text" id="bikeField" name="bike" required readonly>
+        <input id="bikeField" readonly required>
       </label>
 
       <label>Pickup date & time
-        <input type="datetime-local" id="pickupDate" name="pickup" required>
+        <input type="datetime-local" id="pickupDate" required>
       </label>
 
       <label>Drop date & time
-        <input type="datetime-local" id="dropDate" name="drop_time" required>
+        <input type="datetime-local" id="dropDate" required>
       </label>
 
       <label>Your full name
-        <input type="text" id="name" name="name" required>
+        <input id="name" required>
       </label>
 
-      <label>Your phone (WhatsApp)
-        <input type="tel" id="phone" name="phone" required>
+      <label>Phone (WhatsApp)
+        <input id="phone" required>
       </label>
 
       <label>Email (optional)
-        <input type="email" id="email" name="email">
+        <input id="email">
       </label>
 
       <label>Pickup location
-        <input type="text" id="pickupLocation" name="pickup_location" required>
+        <input id="pickupLocation" required>
       </label>
 
-      <label>Message / special requests
-        <textarea id="message" name="message"></textarea>
+      <label>Message
+        <textarea id="message"></textarea>
       </label>
 
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Send Booking</button>
-      <button type="button" id="clearBtn" class="btn btn-ghost">Clear</button>
+      <button class="btn btn-primary">Send Booking</button>
+      <button type="button" class="btn btn-ghost" id="clearBtn">Clear</button>
     </div>
   </form>
 
   <p class="muted" id="msg"></p>
 </section>
 
-<section id="contact" class="container section contact">
+<section id="contact" class="container section">
   <h3>Contact</h3>
-  <p><strong>Email:</strong> ridewallah@gmail.com</p>
-  <p><strong>Phone / WhatsApp:</strong> +91 89822 69317</p>
-  <p><strong>Service area:</strong> Delhi NCR</p>
+  <p>Email: ridewallah@gmail.com</p>
+  <p>WhatsApp: +91 89822 69317</p>
+  <p>Service Area: Delhi NCR</p>
 </section>
 
 <footer class="site-footer">
-  <div class="container">
-    <p>© Ride Wallah • Ride safe</p>
-  </div>
+  © RideWallah • Ride Safe
 </footer>
 
 <script>
-document.getElementById("bookingForm").addEventListener("submit", function(e) {
+/* Bike selection */
+document.querySelectorAll(".bike-card").forEach(card => {
+  card.onclick = () => {
+    document.querySelectorAll(".bike-card").forEach(b => b.classList.remove("active"));
+    card.classList.add("active");
+    document.getElementById("bikeField").value = card.dataset.bike;
+  };
+});
+
+/* Booking submit */
+document.getElementById("bookingForm").onsubmit = async (e) => {
   e.preventDefault();
 
-  const formData = new FormData(this);
+  const data = {
+    bike: bikeField.value,
+    pickup: pickupDate.value,
+    drop_time: dropDate.value,
+    name: name.value,
+    phone: phone.value,
+    email: email.value,
+    pickup_location: pickupLocation.value,
+    message: message.value
+  };
 
-  fetch("https://rahulmishra.pythonanywhere.com/api/booking", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.json())
-  .then(() => {
-    document.getElementById("msg").innerText =
-      "✅ Booking submitted successfully!";
-    document.getElementById("bookingForm").reset();
-  })
-  .catch(() => {
-    document.getElementById("msg").innerText =
-      "❌ Booking failed. Please try again.";
-  });
-});
+  try {
+    const res = await fetch("https://rahulmishra.pythonanywhere.com/api/booking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-document.getElementById("clearBtn").addEventListener("click", () => {
-  document.getElementById("bookingForm").reset();
-});
-  <script>
-/* TEMP FIX: set default bike */
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("bikeField").value = "Standard Bike";
-});
-</script>
-  <script>
-/* Bike selection logic */
-document.querySelectorAll(".bike-card").forEach(btn => {
-  btn.addEventListener("click", function () {
-    const bikeName = this.getAttribute("data-bike");
-    document.getElementById("bikeField").value = bikeName;
+    if (!res.ok) throw new Error();
+    msg.innerText = "✅ Booking submitted successfully!";
+    bookingForm.reset();
+  } catch {
+    msg.innerText = "❌ Booking failed. Please try again.";
+  }
+};
 
-    // Scroll to booking form
-    document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
-  });
-});
-</script>
+clearBtn.onclick = () => bookingForm.reset();
 </script>
 
 </body>
