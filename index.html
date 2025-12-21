@@ -213,6 +213,55 @@ daysInput.addEventListener('input', calculateRent);
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+</script> <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const sendBtn = document.querySelector("button[type='submit'], input[type='submit']");
+
+  if (!sendBtn) {
+    console.error("Booking button not found!");
+    return;
+  }
+
+  sendBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const selectedBike = document.querySelector("input[name='Selected bike']")?.value || "";
+    const pickup = document.querySelector("input[name='Pickup location']")?.value || "";
+    const fullname = document.querySelector("input[name='Your full name']")?.value || "";
+    const phone = document.querySelector("input[name='Your phone (WhatsApp)']")?.value || "";
+    const email = document.querySelector("input[name='Email (optional)']")?.value || "";
+    const message = document.querySelector("textarea[name='Message / special requests']")?.value || "";
+
+    const bookingData = {
+      bike: selectedBike,
+      name: fullname,
+      phone: phone,
+      email: email,
+      pickup: pickup,
+      message: message
+    };
+
+    fetch("https://rahulmishra.pythonanywhere.com/api/booking", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(bookingData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert("Booking submitted successfully!");
+      console.log("Response from backend:", data);
+    })
+    .catch(err => {
+      alert("Error submitting booking");
+      console.error(err);
+    });
+
+  });
+
+});
 </script>
-</body>
+</body> 
 </html>
