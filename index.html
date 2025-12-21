@@ -8,122 +8,138 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  margin: 0;
+  background:#f4f6f9;
+  margin:0;
 }
-
 header {
-  background: linear-gradient(90deg,#0f4c75,#3282b8);
-  color: white;
-  padding: 15px;
+  background:#0d47a1;
+  color:white;
+  padding:15px 30px;
+  font-size:22px;
 }
-
-header h1 {
-  margin: 0;
-}
-
 .container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
 }
-
-.card {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.grid {
-  display: grid;
+.bikes {
+  display:grid;
   grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 15px;
+  gap:20px;
 }
-
+.bike {
+  background:white;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+.bike img {
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.bike button {
+  width:100%;
+  padding:10px;
+  background:#0d47a1;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+form {
+  background:white;
+  padding:20px;
+  margin-top:30px;
+  border-radius:8px;
+}
 input, textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  width:100%;
+  padding:10px;
+  margin:8px 0;
 }
-
-button {
-  background: #0f4c75;
-  color: white;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
+button.submit {
+  background:#2e7d32;
+  color:white;
+  padding:12px;
+  width:100%;
+  border:none;
 }
-
-button:hover {
-  background: #3282b8;
-}
-
-#msg {
-  margin-top: 10px;
-}
+#msg { margin-top:10px; font-weight:bold; }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>RideWallah</h1>
-</header>
+<header>RideWallah – Bike Rentals</header>
 
 <div class="container">
-  <div class="card">
-    <h2>Book a Bike</h2>
 
-    <form id="bookingForm">
-      <div class="grid">
-        <input id="bike" placeholder="Bike name" required>
-        <input id="pickupDate" type="datetime-local" required>
-        <input id="dropDate" type="datetime-local" required>
-        <input id="name" placeholder="Your name" required>
-        <input id="phone" placeholder="Phone / WhatsApp" required>
-        <input id="email" placeholder="Email">
-        <input id="pickupLocation" placeholder="Pickup location" required>
-        <textarea id="message" placeholder="Message"></textarea>
-      </div>
-
-      <br>
-      <button type="submit">Send Booking</button>
-      <p id="msg"></p>
-    </form>
+<h2>Select a Bike</h2>
+<div class="bikes">
+  <div class="bike">
+    <img src="https://images.unsplash.com/photo-1616353071588-f56c6c6a6e2f">
+    <button onclick="selectBike('Royal Enfield Classic 350')">Royal Enfield 350</button>
+  </div>
+  <div class="bike">
+    <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c8">
+    <button onclick="selectBike('TVS Jupiter')">TVS Jupiter</button>
+  </div>
+  <div class="bike">
+    <img src="https://images.unsplash.com/photo-1597764699515-02b1a7d7b93c">
+    <button onclick="selectBike('Pulsar 150')">Pulsar 150</button>
   </div>
 </div>
 
+<form id="bookingForm">
+<h2>Book a Bike</h2>
+
+<input id="bike" placeholder="Selected Bike" readonly required>
+<input type="datetime-local" id="pickup" required>
+<input type="datetime-local" id="drop_time" required>
+<input id="name" placeholder="Your Name" required>
+<input id="phone" placeholder="Phone" required>
+<input id="email" placeholder="Email">
+<input id="pickup_location" placeholder="Pickup Location" required>
+<textarea id="message" placeholder="Message"></textarea>
+
+<button class="submit">Send Booking</button>
+<p id="msg"></p>
+</form>
+
+</div>
+
 <script>
+function selectBike(bike){
+  document.getElementById("bike").value = bike;
+  window.scrollTo(0,document.body.scrollHeight);
+}
+
 document.getElementById("bookingForm").addEventListener("submit", e => {
   e.preventDefault();
 
-  fetch("/api/booking", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({
+  fetch("https://rahulmishra.pythonanywhere.com/api/booking", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({
       bike: bike.value,
-      pickup_date: pickupDate.value,
-      drop_date: dropDate.value,
+      pickup: pickup.value,
+      drop_time: drop_time.value,
       name: name.value,
       phone: phone.value,
       email: email.value,
-      pickup_location: pickupLocation.value,
+      pickup_location: pickup_location.value,
       message: message.value
     })
   })
   .then(r => r.json())
-  .then(() => {
-    msg.innerText = "✅ Booking Successful";
-    msg.style.color = "green";
+  .then(res => {
+    msg.style.color="green";
+    msg.innerText="✅ Booking successful";
     bookingForm.reset();
   })
   .catch(() => {
-    msg.innerText = "❌ Booking Failed";
-    msg.style.color = "red";
+    msg.style.color="red";
+    msg.innerText="❌ Booking failed";
   });
 });
 </script>
