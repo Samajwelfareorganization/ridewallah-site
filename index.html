@@ -1,311 +1,265 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>RideWallah — Bike Rentals Delhi NCR</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RideWallah | Bike Rentals Delhi NCR</title>
 
 <style>
-:root {
-  --brand: #1e40af;
-  --brand-light: #eef2ff;
-  --text-dark: #1f2937;
+:root{
+  --primary:#1e40af;
+  --accent:#f59e0b;
+  --bg:#f8fafc;
 }
 
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:#111}
+
+header{
+  background:#fff;
+  border-bottom:1px solid #ddd;
+}
+.container{max-width:1200px;margin:auto;padding:16px}
+
+.nav{
+  display:flex;justify-content:space-between;align-items:center
+}
+.nav a{
+  margin-left:20px;
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
 }
 
-body {
-  margin: 0;
-  font-family: Inter, system-ui, sans-serif;
-  background: #f9fafb;
-  color: var(--text-dark);
+.hero{
+  background:linear-gradient(to right,#1e40af,#2563eb);
+  color:#fff;
+  padding:60px 20px;
+}
+.hero h1{font-size:42px;margin:0}
+.hero p{font-size:18px}
+
+.section{padding:50px 20px}
+
+.bikes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 
-/* ---------- HEADER ---------- */
-.site-header {
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+.bike-card{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:.2s;
+}
+.bike-card.active{
+  border-color:var(--primary);
+}
+.bike-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.bike-card div{padding:14px}
+.bike-card h3{margin:0}
+.price{color:var(--accent);font-weight:bold}
+
+form{
+  background:#fff;
+  border-radius:14px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08)
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+label{font-size:14px;font-weight:600}
+input,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  margin-top:6px;
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
+.btn{
+  background:var(--primary);
+  color:#fff;
+  padding:12px 22px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+.btn.secondary{
+  background:#eee;color:#000
 }
 
-.brand {
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--brand);
+footer{
+  background:#111;
+  color:#fff;
+  text-align:center;
+  padding:20px;
 }
 
-.top-nav a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #374151;
-  font-weight: 500;
-}
-
-.top-nav a:hover {
-  color: var(--brand);
-}
-
-/* ---------- HERO ---------- */
-.hero {
-  background: linear-gradient(135deg, var(--brand), #2563eb);
-  color: white;
-  padding: 80px 20px;
-}
-
-.hero h2 {
-  font-size: 42px;
-  font-weight: 800;
-}
-
-.hero p {
-  font-size: 18px;
-  opacity: 0.95;
-}
-
-.btn {
-  padding: 12px 22px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary {
-  background: var(--brand);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #1d4ed8;
-}
-
-.btn-ghost {
-  background: transparent;
-  border: 1px solid #d1d5db;
-}
-
-/* ---------- SECTIONS ---------- */
-.section {
-  background: white;
-  margin: 40px auto;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-
-.section h3 {
-  margin-top: 0;
-}
-
-/* ---------- BIKE BUTTONS ---------- */
-.bikes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-}
-
-.bike-card {
-  border: 2px solid #e5e7eb;
-  padding: 15px;
-  text-align: center;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.bike-card.active {
-  border-color: var(--brand);
-  background: var(--brand-light);
-}
-
-/* ---------- FORM ---------- */
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-}
-
-label {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.form-actions {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.muted {
-  margin-top: 15px;
-  font-weight: 600;
-}
-
-/* ---------- FOOTER ---------- */
-.site-footer {
-  text-align: center;
-  padding: 20px;
-  color: #6b7280;
-}
+#msg{margin-top:15px;font-weight:600}
 </style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-    <div class="brand">RideWallah</div>
-    <nav class="top-nav">
+<header>
+  <div class="container nav">
+    <h2>RideWallah</h2>
+    <div>
       <a href="#bikes">Bikes</a>
       <a href="#booking">Book</a>
       <a href="#contact">Contact</a>
-    </nav>
+    </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="container">
-    <h2>Rent reliable bikes across Delhi NCR</h2>
-    <p>Hourly • Daily • Weekly • Hassle-free booking</p>
-    <a href="#booking" class="btn btn-primary">Book a Bike</a>
+    <h1>Rent Bikes Across Delhi NCR</h1>
+    <p>Hourly • Daily • Weekly | Fast & Reliable</p>
   </div>
 </section>
 
-<section id="bikes" class="container section">
-  <h3>Select a bike</h3>
-  <div class="bikes">
-    <div class="bike-card" data-bike="Honda Activa 125">Honda Activa 125</div>
-    <div class="bike-card" data-bike="TVS Jupiter">TVS Jupiter</div>
-    <div class="bike-card" data-bike="Bajaj Pulsar">Bajaj Pulsar</div>
-    <div class="bike-card" data-bike="Royal Enfield Classic">Royal Enfield</div>
+<!-- BIKES -->
+<section id="bikes" class="section container">
+<h2>Select Your Bike</h2>
+
+<div class="bikes">
+  <div class="bike-card" data-bike="TVS Jupiter">
+    <img src="https://images.unsplash.com/photo-1605559424843-9e4c8f3f7d7a">
+    <div>
+      <h3>TVS Jupiter</h3>
+      <p class="price">₹499 / day</p>
+    </div>
   </div>
-</section>
 
-<section id="booking" class="container section">
-  <h3>Book a bike</h3>
-
-  <form id="bookingForm">
-    <div class="form-grid">
-
-      <label>Selected bike
-        <input id="bikeField" readonly required>
-      </label>
-
-      <label>Pickup date & time
-        <input type="datetime-local" id="pickupDate" required>
-      </label>
-
-      <label>Drop date & time
-        <input type="datetime-local" id="dropDate" required>
-      </label>
-
-      <label>Your full name
-        <input id="name" required>
-      </label>
-
-      <label>Phone (WhatsApp)
-        <input id="phone" required>
-      </label>
-
-      <label>Email (optional)
-        <input id="email">
-      </label>
-
-      <label>Pickup location
-        <input id="pickupLocation" required>
-      </label>
-
-      <label>Message
-        <textarea id="message"></textarea>
-      </label>
-
+  <div class="bike-card" data-bike="Royal Enfield Classic 350">
+    <img src="https://images.unsplash.com/photo-1605559424936-9d9f6c9f4f1a">
+    <div>
+      <h3>Royal Enfield 350</h3>
+      <p class="price">₹999 / day</p>
     </div>
+  </div>
 
-    <div class="form-actions">
-      <button class="btn btn-primary">Send Booking</button>
-      <button type="button" class="btn btn-ghost" id="clearBtn">Clear</button>
+  <div class="bike-card" data-bike="Bajaj Pulsar">
+    <img src="https://images.unsplash.com/photo-1616469829581-739d0f8b6e7f">
+    <div>
+      <h3>Bajaj Pulsar</h3>
+      <p class="price">₹799 / day</p>
     </div>
-  </form>
-
-  <p class="muted" id="msg"></p>
+  </div>
+</div>
 </section>
 
-<section id="contact" class="container section">
-  <h3>Contact</h3>
-  <p>Email: ridewallah@gmail.com</p>
-  <p>WhatsApp: +91 89822 69317</p>
-  <p>Service Area: Delhi NCR</p>
+<!-- BOOKING -->
+<section id="booking" class="section container">
+<h2>Book a Bike</h2>
+
+<form id="bookingForm">
+<div class="form-grid">
+
+<label>Selected Bike
+<input id="bikeField" required readonly>
+</label>
+
+<label>Pickup Date & Time
+<input type="datetime-local" id="pickupDate" required>
+</label>
+
+<label>Drop Date & Time
+<input type="datetime-local" id="dropDate" required>
+</label>
+
+<label>Your Name
+<input id="name" required>
+</label>
+
+<label>Phone (WhatsApp)
+<input id="phone" required>
+</label>
+
+<label>Email
+<input type="email" id="email">
+</label>
+
+<label>Pickup Location
+<input id="pickupLocation" required>
+</label>
+
+<label>Message
+<textarea id="message"></textarea>
+</label>
+
+</div>
+
+<br>
+<button class="btn">Send Booking</button>
+<button type="button" class="btn secondary" id="clearBtn">Clear</button>
+
+<p id="msg"></p>
+</form>
 </section>
 
-<footer class="site-footer">
-  © RideWallah • Ride Safe
+<section id="contact" class="section container">
+<h2>Contact</h2>
+<p>📧 ridewallah@gmail.com</p>
+<p>📱 +91 89822 69317</p>
+</section>
+
+<footer>
+© RideWallah | Ride Safe
 </footer>
 
 <script>
-/* Bike selection */
-document.querySelectorAll(".bike-card").forEach(card => {
-  card.onclick = () => {
-    document.querySelectorAll(".bike-card").forEach(b => b.classList.remove("active"));
+document.querySelectorAll(".bike-card").forEach(card=>{
+  card.onclick=()=>{
+    document.querySelectorAll(".bike-card").forEach(c=>c.classList.remove("active"));
     card.classList.add("active");
-    document.getElementById("bikeField").value = card.dataset.bike;
-  };
+    bikeField.value=card.dataset.bike;
+  }
 });
 
-/* Booking submit */
-document.getElementById("bookingForm").onsubmit = async (e) => {
+bookingForm.onsubmit=async e=>{
   e.preventDefault();
 
-  const data = {
-    bike: bikeField.value,
-    pickup: pickupDate.value,
-    drop_time: dropDate.value,
-    name: name.value,
-    phone: phone.value,
-    email: email.value,
-    pickup_location: pickupLocation.value,
-    message: message.value
+  const data={
+    bike:bikeField.value,
+    pickup:pickupDate.value,
+    drop_time:dropDate.value,
+    name:name.value,
+    phone:phone.value,
+    email:email.value,
+    pickup_location:pickupLocation.value,
+    message:message.value
   };
 
-  try {
-    const res = await fetch("https://rahulmishra.pythonanywhere.com/api/booking", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+  try{
+    const r=await fetch("https://rahulmishra.pythonanywhere.com/api/booking",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(data)
     });
 
-    if (!res.ok) throw new Error();
-    msg.innerText = "✅ Booking submitted successfully!";
+    if(!r.ok) throw "err";
+    msg.innerText="✅ Booking submitted successfully!";
     bookingForm.reset();
-  } catch {
-    msg.innerText = "❌ Booking failed. Please try again.";
+  }catch{
+    msg.innerText="❌ Booking failed. Please try again.";
   }
 };
 
-clearBtn.onclick = () => bookingForm.reset();
+clearBtn.onclick=()=>bookingForm.reset();
 </script>
 
 </body>
