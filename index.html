@@ -144,6 +144,18 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("bikeField").value = "Standard Bike";
 });
 </script>
+  <script>
+/* Bike selection logic */
+document.querySelectorAll(".bike-card").forEach(btn => {
+  btn.addEventListener("click", function () {
+    const bikeName = this.getAttribute("data-bike");
+    document.getElementById("bikeField").value = bikeName;
+
+    // Scroll to booking form
+    document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+  });
+});
+</script>
 </script>
 
 </body>
