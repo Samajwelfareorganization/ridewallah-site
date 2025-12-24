@@ -1,148 +1,41 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RideWallah – Bike Rentals</title>
-
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background:#f4f6f9;
-  margin:0;
-}
-header {
-  background:#0d47a1;
-  color:white;
-  padding:15px 30px;
-  font-size:22px;
-}
-.container {
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-.bikes {
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-.bike {
-  background:white;
-  border-radius:8px;
-  overflow:hidden;
-  box-shadow:0 2px 10px rgba(0,0,0,.1);
-}
-.bike img {
-  width:100%;
-  height:180px;
-  object-fit:cover;
-}
-.bike button {
-  width:100%;
-  padding:10px;
-  background:#0d47a1;
-  color:white;
-  border:none;
-  cursor:pointer;
-}
-form {
-  background:white;
-  padding:20px;
-  margin-top:30px;
-  border-radius:8px;
-}
-input, textarea {
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-}
-button.submit {
-  background:#2e7d32;
-  color:white;
-  padding:12px;
-  width:100%;
-  border:none;
-}
-#msg { margin-top:10px; font-weight:bold; }
-</style>
+  <title>Ride Wallah – Bike Rental</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<body class="bg-light">
 
-<body>
-
-<header>RideWallah – Bike Rentals</header>
-
-<div class="container">
-
-<h2>Select a Bike</h2>
-<div class="bikes">
-  <div class="bike">
-    <img src="https://images.unsplash.com/photo-1616353071588-f56c6c6a6e2f">
-    <button onclick="selectBike('Royal Enfield Classic 350')">Royal Enfield 350</button>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <span class="navbar-brand">🏍 Ride Wallah</span>
   </div>
-  <div class="bike">
-    <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c8">
-    <button onclick="selectBike('TVS Jupiter')">TVS Jupiter</button>
-  </div>
-  <div class="bike">
-    <img src="https://images.unsplash.com/photo-1597764699515-02b1a7d7b93c">
-    <button onclick="selectBike('Pulsar 150')">Pulsar 150</button>
+</nav>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Rent a Bike in Minutes</h2>
+      <p>Affordable • Reliable • Easy</p>
+
+      <form method="POST" action="/book">
+        <input class="form-control mb-2" name="name" placeholder="Your Name" required>
+        <input class="form-control mb-2" name="phone" placeholder="Phone Number" required>
+        <select class="form-control mb-2" name="bike">
+          <option>Royal Enfield</option>
+          <option>Activa</option>
+          <option>Pulsar</option>
+        </select>
+        <input class="form-control mb-2" type="date" name="date" required>
+        <button class="btn btn-primary w-100">Book Now</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" class="img-fluid rounded">
+    </div>
   </div>
 </div>
-
-<form id="bookingForm">
-<h2>Book a Bike</h2>
-
-<input id="bike" placeholder="Selected Bike" readonly required>
-<input type="datetime-local" id="pickup" required>
-<input type="datetime-local" id="drop_time" required>
-<input id="name" placeholder="Your Name" required>
-<input id="phone" placeholder="Phone" required>
-<input id="email" placeholder="Email">
-<input id="pickup_location" placeholder="Pickup Location" required>
-<textarea id="message" placeholder="Message"></textarea>
-
-<button class="submit">Send Booking</button>
-<p id="msg"></p>
-</form>
-
-</div>
-
-<script>
-function selectBike(bike){
-  document.getElementById("bike").value = bike;
-  window.scrollTo(0,document.body.scrollHeight);
-}
-
-document.getElementById("bookingForm").addEventListener("submit", e => {
-  e.preventDefault();
-
-  fetch("https://rahulmishra.pythonanywhere.com/api/booking", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({
-      bike: bike.value,
-      pickup: pickup.value,
-      drop_time: drop_time.value,
-      name: name.value,
-      phone: phone.value,
-      email: email.value,
-      pickup_location: pickup_location.value,
-      message: message.value
-    })
-  })
-  .then(r => r.json())
-  .then(res => {
-    msg.style.color="green";
-    msg.innerText="✅ Booking successful";
-    bookingForm.reset();
-  })
-  .catch(() => {
-    msg.style.color="red";
-    msg.innerText="❌ Booking failed";
-  });
-});
-</script>
 
 </body>
 </html>
